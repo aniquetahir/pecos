@@ -246,7 +246,9 @@ class RankingModel(pecos.BaseClass):
         query_prefix: str = "query: "
         passage_prefix: str = "document: "
         inp_id_col: str = "inp_id"
+        inp_id_orig_col: Optional[str] = None
         lbl_id_col: str = "lbl_id"
+        lbl_id_orig_col: Optional[str] = None
         keyword_col_name: str = "keywords"
         content_col_names: List[str] = field(default_factory=lambda: ["title", "contents"])
         content_sep: str = " "
@@ -453,11 +455,13 @@ class RankingModel(pecos.BaseClass):
         fts = []
         inp_idxs = []
         lbl_idxs = []
+        inp_id_orig_col = eval_params.inp_id_orig_col if eval_params.inp_id_orig_col else eval_params.inp_id_col
+        lbl_id_orig_col = eval_params.lbl_id_orig_col if eval_params.lbl_id_orig_col else eval_params.lbl_id_col
         for s in data:
             inp_id = s[eval_params.inp_id_col]
             retr_id = s[eval_params.lbl_id_col]
-            inp_idxs.append(inp_id)
-            lbl_idxs.append(retr_id)
+            inp_idxs.append(table_stores["input"][inp_id][inp_id_orig_col])
+            lbl_idxs.append(table_stores["label"][retr_id][lbl_id_orig_col])
 
             fts.append(
                 RankingDataUtils._format_sample(

@@ -119,7 +119,9 @@ Following is the example of the configuration file for prediction:
     "query_prefix": "query: ",
     "passage_prefix": "document: ",
     "inp_id_col": "inp_id",
+    "inp_id_orig_col": "inp_id",
     "lbl_id_col": "lbl_id",
+    "lbl_id_orig_col": "lbl_id",
     "keyword_col_name": "keywords",
     "content_col_names": ["title", "contents"],
     "append_eos_token": false,
@@ -166,8 +168,8 @@ can be provided in the configuration file.
 # +-----------------+---------------+-----------------------+
 # | lbl_id          | int32         | input id              |
 # | title           | string        | title text            |
-# | content         | string        | content string        |
-# | ...             | string        | content string        |
+# | *content        | string        | content string        |
+# | *...            | string        | content string        |
 # +-----------------+---------------+-----------------------+
 ```
 
@@ -187,6 +189,7 @@ can be provided in the configuration file.
 # | Column Name     | Data Type     | Description           |
 # +-----------------+---------------+-----------------------+
 # | inp_id          | int32         | input id              |
+# | *inp_id_orig    | int32         | input id              |
 # | keywords        | string        | keyword string        |
 # +-----------------+---------------+-----------------------+
 ```
@@ -197,8 +200,11 @@ can be provided in the configuration file.
 # | Column Name     | Data Type     | Description           |
 # +-----------------+---------------+-----------------------+
 # | lbl_id          | int32         | input id              |
+# | *lbl_id_orig    | int32         | input id              |
 # | title           | string        | title text            |
-# | content         | string        | content string        |
-# | ...             | string        | content string        |
+# | *content        | string        | content string        |
+# | *...            | string        | content string        |
 # +-----------------+---------------+-----------------------+
 ```
+
+`*` - optional
